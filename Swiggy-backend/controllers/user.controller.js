@@ -1,5 +1,6 @@
 const UserModel = require("../models/user.model.js")
-const bcrypt=require("bcrypt")
+const bcrypt=require("bcrypt");
+var jwt = require('jsonwebtoken');
 
 async function register(req, res) {
     try {
@@ -26,10 +27,12 @@ async function login(req, res) {
         if(!decode){
             return res.status(404).json({"message":"user credentials invalid"})
         }
+        var token = jwt.sign({id:user.id,email:user.email}, 'shhhhh');
         return res.status(200).json({
             user:{
                 email:user.email,
-                fullName:user.fullName
+                fullName:user.fullName,
+                accesstoken:token
             }
         })
     } catch (error) {
