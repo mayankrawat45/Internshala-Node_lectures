@@ -12,4 +12,4 @@ function resturantRoutes(app){
     app.delete('/api/restaurants/:id',verify,deleteRestaurant)
 }
 
-module.exports=resturantRoutes
+module.exports=resturantRoutes;
